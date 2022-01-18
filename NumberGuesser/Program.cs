@@ -9,27 +9,9 @@ namespace NumberGuesser
         //Entry point method
         static void Main(string[] args)
         {
-            //Set app vars
-            string appName = "Number Guesser";
-            string appVersion = "1.0.0";
-            string appAuthor = "Pavel";
+            GetAppInfo(); //Run GetAppInfo function to get info 
 
-            //Change text color 
-            Console.ForegroundColor = ConsoleColor.Green;
-
-            //Write out app info
-            Console.WriteLine("{0}: Version {1} by {2}", appName, appVersion, appAuthor);
-
-            //Reset text color
-            Console.ResetColor();
-
-            //Ask user name
-            Console.WriteLine("What is your name?");
-
-            //Get user input
-            string inputName = Console.ReadLine();
-
-            Console.WriteLine("Hello {0}, lets play a game...", inputName);
+            GreetUser(); //Ask for users name and greet
 
             while (true)
             {
@@ -60,14 +42,8 @@ namespace NumberGuesser
 
                     if (!int.TryParse(input, out guess))
                     {
-                        //Change text color 
-                        Console.ForegroundColor = ConsoleColor.Red;
-
-                        //Tell user it is not a number 
-                        Console.WriteLine("Please enter an actual number");
-
-                        //Reset text color
-                        Console.ResetColor();
+                        //Print error message
+                        PrintColorMessage(ConsoleColor.Red, "Please use an actual number");
 
                         //Keep going
 
@@ -80,26 +56,13 @@ namespace NumberGuesser
                     //Match guess to correct number
                     if (guess != correctNumber)
                     {
-                        //Change text color 
-                        Console.ForegroundColor = ConsoleColor.Red;
-
-                        //Tell user it is wrong number 
-                        Console.WriteLine("Wrong number, please try again");
-
-                        //Reset text color
-                        Console.ResetColor();
+                        //Print error message
+                       PrintColorMessage(ConsoleColor.Red, "Wrong number, please try again");
                     }
                 }
 
-                // Output success message
-                //Change text color 
-                Console.ForegroundColor = ConsoleColor.Yellow;
-
-                //Write out app info
-                Console.WriteLine("You are CORRECT!!!!");
-
-                //Reset text color
-                Console.ResetColor();
+                //Print success message
+                PrintColorMessage(ConsoleColor.Yellow, "Correct!!! You guessed it!");
 
                 // Ask to play again
                 Console.WriteLine("Play again? [Y or N]");
@@ -123,5 +86,47 @@ namespace NumberGuesser
                 }
             }
         }
+
+        static void GetAppInfo()
+        {
+            //Set app vars
+            string appName = "Number Guesser";
+            string appVersion = "1.0.0";
+            string appAuthor = "Pavel";
+
+            //Change text color 
+            Console.ForegroundColor = ConsoleColor.Green;
+
+            //Write out app info
+            Console.WriteLine("{0}: Version {1} by {2}", appName, appVersion, appAuthor);
+
+            //Reset text color
+            Console.ResetColor();
+        }
+
+        static void GreetUser()
+        {
+            //Ask user name
+            Console.WriteLine("What is your name?");
+
+            //Get user input
+            string inputName = Console.ReadLine();
+
+            Console.WriteLine("Hello {0}, lets play a game...", inputName);
+        }
+
+        static void PrintColorMessage(ConsoleColor color, string message)
+        {
+            //Change text color 
+            Console.ForegroundColor = color;
+
+            //Tell user it is not a number 
+            Console.WriteLine(message);
+
+            //Reset text color
+            Console.ResetColor();
+        }
     }
+
+    
 }
